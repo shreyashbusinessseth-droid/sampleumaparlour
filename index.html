@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uma Beauty Parlour - Best Beauty Parlour in Bahraich</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#e8567a;--rose-dark:#c43d62;--rose-light:#fce4ec;--gold:#c9a96e;--dark:#2d1b24;--gray:#6b5b62;--light:#fff9fb;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:var(--light);color:var(--dark);overflow-x:hidden;}
+h1,h2,h3{font-family:'Playfair Display',serif;}
+header{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,249,251,0.96);backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(232,86,122,0.12);display:flex;align-items:center;justify-content:space-between;padding:12px 24px;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--rose),var(--rose-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.logo-text h1{font-size:1.1rem;color:var(--rose-dark);line-height:1.1;}
+.logo-text span{font-size:0.65rem;color:var(--gold);letter-spacing:1px;text-transform:uppercase;}
+.cart-btn{position:relative;background:var(--rose-light);border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all 0.3s;}
+.cart-btn:hover{background:var(--rose);}
+.cart-count{position:absolute;top:-4px;right:-4px;background:var(--rose-dark);color:white;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;}
+.cart-count.show{display:flex;}
+.hero{position:relative;height:100vh;min-height:500px;display:flex;align-items:center;justify-content:center;text-align:center;}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(45,27,36,0.5) 0%,rgba(45,27,36,0.78) 100%);}
+.hero-content{position:relative;z-index:2;padding:0 20px;}
+.hero-badge{display:inline-block;background:var(--gold);color:white;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:16px;}
+.hero-content h2{font-size:clamp(2rem,6vw,4rem);color:white;line-height:1.2;text-shadow:0 2px 20px rgba(0,0,0,0.4);margin-bottom:10px;}
+.hero-content p{color:rgba(255,255,255,0.85);font-size:1rem;margin-bottom:28px;}
+.btn-primary{background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:white;border:none;padding:14px 36px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;letter-spacing:0.5px;transition:all 0.3s;box-shadow:0 6px 20px rgba(232,86,122,0.4);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(232,86,122,0.5);}
+section{padding:64px 20px;}
+.section-title{text-align:center;margin-bottom:40px;}
+.section-title h2{font-size:clamp(1.6rem,4vw,2.4rem);color:var(--dark);margin-bottom:8px;}
+.section-title p{color:var(--gray);font-size:0.9rem;}
+.section-title::after{content:'';display:block;width:60px;height:3px;background:linear-gradient(90deg,var(--rose),var(--gold));margin:12px auto 0;border-radius:2px;}
+.services-section{background:white;}
+.carousel-wrapper{position:relative;max-width:1100px;margin:0 auto;overflow:hidden;}
+.carousel-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:10px 4px 20px;-webkit-overflow-scrolling:touch;}
+.carousel-track::-webkit-scrollbar{display:none;}
+.service-card{flex:0 0 260px;scroll-snap-align:start;background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(232,86,122,0.1);border:1px solid #fce4ec;transition:transform 0.3s,box-shadow 0.3s;}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(232,86,122,0.2);}
+.service-card img{width:100%;height:180px;object-fit:cover;}
+.card-body{padding:16px;}
+.card-body h3{font-size:1rem;color:var(--dark);margin-bottom:4px;}
+.card-price{color:var(--rose);font-weight:700;font-size:1.1rem;margin-bottom:12px;}
+.tip-label{font-size:0.72rem;color:var(--gray);margin-bottom:4px;display:block;}
+.tip-input{width:100%;padding:7px 10px;border:1.5px solid #fce4ec;border-radius:10px;font-size:0.82rem;margin-bottom:10px;outline:none;font-family:inherit;color:var(--dark);}
+.tip-input:focus{border-color:var(--rose);}
+.btn-book{width:100%;padding:10px;background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:white;border:none;border-radius:12px;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.3s;}
+.btn-book:hover{opacity:0.88;transform:scale(1.02);}
+.carousel-arrow{position:absolute;top:45%;transform:translateY(-50%);background:white;border:2px solid var(--rose-light);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;font-size:20px;color:var(--rose);box-shadow:0 3px 12px rgba(0,0,0,0.1);transition:all 0.3s;}
+.carousel-arrow:hover{background:var(--rose);color:white;}
+.arrow-left{left:0;}.arrow-right{right:0;}
+.reviews-section{background:var(--rose-light);}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;max-width:1100px;margin:0 auto;}
+.review-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(232,86,122,0.1);transition:transform 0.3s;}
+.review-card:hover{transform:translateY(-4px);}
+.review-card img{width:100%;height:220px;object-fit:cover;}
+.review-body{padding:18px;}
+.stars{color:#f5a623;font-size:1rem;margin-bottom:8px;}
+.review-body p{font-size:0.82rem;color:var(--gray);line-height:1.6;}
+.contact-section{background:white;}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:900px;margin:0 auto;}
+.contact-card{text-align:center;padding:26px 16px;border-radius:16px;background:var(--light);border:1px solid #fce4ec;}
+.contact-icon{font-size:2rem;margin-bottom:10px;}
+.contact-card h4{font-size:0.9rem;font-weight:600;color:var(--dark);margin-bottom:6px;}
+.contact-card a,.contact-card p{font-size:0.83rem;color:var(--gray);text-decoration:none;}
+.contact-card a:hover{color:var(--rose);}
+footer{background:var(--dark);color:rgba(255,255,255,0.65);text-align:center;padding:24px 20px;font-size:0.82rem;}
+footer span{color:var(--rose);}
+.floating-wa{position:fixed;bottom:82px;right:20px;z-index:800;background:#25d366;color:white;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;transition:transform 0.3s;}
+.floating-wa:hover{transform:scale(1.1);}
+.floating-cart{position:fixed;bottom:18px;right:20px;z-index:800;background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:white;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 20px rgba(232,86,122,0.4);border:none;cursor:pointer;transition:transform 0.3s;}
+.floating-cart:hover{transform:scale(1.1);}
+.fc-count{position:absolute;top:-4px;right:-4px;background:var(--dark);color:white;font-size:9px;font-weight:700;width:17px;height:17px;border-radius:50%;display:none;align-items:center;justify-content:center;}
+.fc-count.show{display:flex;}
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(45,27,36,0.6);z-index:1000;align-items:center;justify-content:center;padding:16px;}
+.modal-backdrop.open{display:flex;}
+.modal{background:white;border-radius:24px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:slideUp 0.3s ease;}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{padding:22px 22px 14px;border-bottom:1px solid #fce4ec;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:white;z-index:2;border-radius:24px 24px 0 0;}
+.modal-header h3{font-size:1.15rem;color:var(--dark);}
+.modal-close{background:var(--rose-light);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.modal-body{padding:18px 22px 22px;}
+.cart-empty{text-align:center;padding:32px 0;color:var(--gray);}
+.cart-empty .ei{font-size:3rem;margin-bottom:12px;}
+.cart-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #fce4ec;}
+.ci-name{flex:1;}
+.ci-name h4{font-size:0.9rem;color:var(--dark);}
+.ci-name span{font-size:0.75rem;color:var(--gray);}
+.ci-price{font-weight:700;color:var(--rose);font-size:0.95rem;min-width:60px;text-align:right;}
+.ci-remove{background:none;border:none;color:#ccc;cursor:pointer;font-size:16px;transition:color 0.2s;}
+.ci-remove:hover{color:var(--rose);}
+.cart-total{display:flex;justify-content:space-between;align-items:center;padding:14px 0 0;font-weight:700;font-size:1rem;}
+.btn-checkout{width:100%;margin-top:14px;padding:13px;background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:white;border:none;border-radius:14px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.3s;}
+.btn-checkout:hover{opacity:0.9;}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--dark);margin-bottom:5px;}
+.form-group input,.form-group textarea{width:100%;padding:10px 14px;border:1.5px solid #fce4ec;border-radius:12px;font-size:0.88rem;font-family:inherit;outline:none;transition:border 0.2s;color:var(--dark);background:white;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--rose);}
+.form-group textarea{resize:vertical;min-height:78px;}
+.order-summary{background:var(--rose-light);border-radius:14px;padding:14px;margin-bottom:14px;}
+.order-summary h4{font-size:0.86rem;font-weight:600;margin-bottom:10px;color:var(--dark);}
+.os-item{display:flex;justify-content:space-between;font-size:0.8rem;color:var(--gray);padding:3px 0;}
+.os-total{display:flex;justify-content:space-between;font-size:0.9rem;font-weight:700;color:var(--rose);border-top:1px solid #f0c0ce;margin-top:8px;padding-top:8px;}
+.success-box{text-align:center;padding:20px 0;}
+.success-icon{font-size:3.5rem;margin-bottom:14px;}
+.success-box h3{font-size:1.2rem;color:var(--dark);margin-bottom:8px;}
+.success-box p{font-size:0.86rem;color:var(--gray);line-height:1.6;margin-bottom:20px;}
+.btn-wa{display:inline-flex;align-items:center;gap:8px;background:#25d366;color:white;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.9rem;box-shadow:0 4px 16px rgba(37,211,102,0.3);}
+.toast{position:fixed;top:76px;right:20px;background:var(--dark);color:white;padding:10px 18px;border-radius:12px;font-size:0.83rem;z-index:2000;transform:translateX(130%);transition:transform 0.35s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+.toast.show{transform:translateX(0);}
+@media(max-width:600px){.service-card{flex:0 0 220px;}section{padding:48px 14px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#" class="logo">
+    <div class="logo-icon">💄</div>
+    <div class="logo-text">
+      <h1>Uma Beauty Parlour</h1>
+      <span>Best Beauty Parlour</span>
+    </div>
+  </a>
+  <button class="cart-btn" onclick="openCart()" aria-label="Cart">
+    🛒<span class="cart-count" id="cartCount">0</span>
+  </button>
+</header>
+
+<section class="hero" style="padding:0;">
+  <img class="hero-img" src="https://i.ibb.co/pNKc4mK/hero-section.jpg" alt="Uma Beauty Parlour" loading="lazy">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✨ Uma Beauty Parlour · Bahraich</div>
+    <h2>Look Beautiful,<br>Feel Confident</h2>
+    <p>Premium makeup &amp; styling in Bahraich, Uttar Pradesh</p>
+    <button class="btn-primary" onclick="openBookingModal()">📅 Book Appointment</button>
+  </div>
+</section>
+
+<section class="services-section">
+  <div class="section-title">
+    <h2>Our Services</h2>
+    <p>Choose from our premium beauty services</p>
+  </div>
+  <div class="carousel-wrapper">
+    <button class="carousel-arrow arrow-left" onclick="scrollCarousel(-1)">&#8249;</button>
+    <div class="carousel-track" id="carouselTrack">
+      <div class="service-card">
+        <img src="https://i.ibb.co/Kpf7DDmm/nail-style.jpg" alt="Nail Style" loading="lazy">
+        <div class="card-body">
+          <h3>Nail Style</h3>
+          <div class="card-price">₹1000</div>
+          <label class="tip-label">💡 Tip / Custom Price (optional)</label>
+          <input class="tip-input" type="number" placeholder="Enter tip amount" id="tip-0" min="0">
+          <button class="btn-book" onclick="addToCart('Nail Style',1000,0)">🛒 Book Service</button>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://i.ibb.co/Qvf1ShVg/party-makeup.jpg" alt="Party Makeup" loading="lazy">
+        <div class="card-body">
+          <h3>Party Makeup</h3>
+          <div class="card-price">₹1000</div>
+          <label class="tip-label">💡 Tip / Custom Price (optional)</label>
+          <input class="tip-input" type="number" placeholder="Enter tip amount" id="tip-1" min="0">
+          <button class="btn-book" onclick="addToCart('Party Makeup',1000,1)">🛒 Book Service</button>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://i.ibb.co/vxLXXscT/bridal-makeup.jpg" alt="Bridal Makeup" loading="lazy">
+        <div class="card-body">
+          <h3>Bridal Makeup</h3>
+          <div class="card-price">₹1000</div>
+          <label class="tip-label">💡 Tip / Custom Price (optional)</label>
+          <input class="tip-input" type="number" placeholder="Enter tip amount" id="tip-2" min="0">
+          <button class="btn-book" onclick="addToCart('Bridal Makeup',1000,2)">🛒 Book Service</button>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://i.ibb.co/FLcvBqc8/hari-style.jpg" alt="Hair Style" loading="lazy">
+        <div class="card-body">
+          <h3>Hair Style</h3>
+          <div class="card-price">₹1000</div>
+          <label class="tip-label">💡 Tip / Custom Price (optional)</label>
+          <input class="tip-input" type="number" placeholder="Enter tip amount" id="tip-3" min="0">
+          <button class="btn-book" onclick="addToCart('Hair Style',1000,3)">🛒 Book Service</button>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-arrow arrow-right" onclick="scrollCarousel(1)">&#8250;</button>
+  </div>
+</section>
+
+<section class="reviews-section">
+  <div class="section-title">
+    <h2>Happy Customers</h2>
+    <p>Real experiences from our lovely clients</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <img src="https://i.ibb.co/KcPT1ZnJ/client-1.jpg" alt="Happy Client 1" loading="lazy">
+      <div class="review-body">
+        <div class="stars">★★★★★</div>
+        <p>"So lovely experience 🥰✨ the service felt super warm and professional 💖 makeup was beautifully done 💄🌸 and the products used were really high quality 😍 totally satisfied and definitely a place to visit again ❤️"</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <img src="https://i.ibb.co/ZpgcXdNC/client-2.jpg" alt="Happy Client 2" loading="lazy">
+      <div class="review-body">
+        <div class="stars">★★★★★</div>
+        <p>"Really enjoyed the whole session 😊💫 everything was handled with so much care 💕 the makeup turned out stunning ✨💄 products were absolutely amazing 🌿😍 such a comfortable and happy experience 💗"</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <img src="https://i.ibb.co/fztC4N5R/client-3.jpg" alt="Happy Client 3" loading="lazy">
+      <div class="review-body">
+        <div class="stars">★★★★★</div>
+        <p>"Had an amazing experience 🤍🌟 the service was very smooth and friendly 🫶 makeup looked perfect and elegant 💄✨ loved the product quality a lot 😌🌸 highly recommended for sure 💖"</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <img src="https://i.ibb.co/N6p4RRmH/client-4.jpg" alt="Happy Client 4" loading="lazy">
+      <div class="review-body">
+        <div class="stars">★★★★★</div>
+        <p>"Such a pleasant experience 😍🌈 the service was impressive and professional 💕 makeup was done beautifully 💄💫 and the products were really awesome 🌟🤍 felt very happy and satisfied throughout 💝"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="section-title">
+    <h2>Visit Us</h2>
+    <p>We would love to welcome you at our parlour</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <h4>Location</h4>
+      <p>HJF8+8J Bahraich,<br>Uttar Pradesh</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📞</div>
+      <h4>Phone</h4>
+      <a href="tel:8299856640">+91 8299856640</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">💬</div>
+      <h4>WhatsApp</h4>
+      <a href="https://wa.me/918299856640" target="_blank">Chat on WhatsApp</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">✉️</div>
+      <h4>Email</h4>
+      <a href="mailto:shreyashseth2007@gmail.com">shreyashseth2007@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2024 <span>Uma Beauty Parlour</span> · Bahraich, Uttar Pradesh · All Rights Reserved</p>
+  <p style="margin-top:6px;">Made with love for beautiful women 💖</p>
+</footer>
+
+<a href="https://wa.me/918299856640" class="floating-wa" target="_blank" aria-label="WhatsApp Us">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<button class="floating-cart" onclick="openCart()" aria-label="Cart">
+  🛒<span class="fc-count" id="fcCount">0</span>
+</button>
+
+<div class="toast" id="toast">Added to cart!</div>
+
+<div class="modal-backdrop" id="cartModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>🛒 Your Cart</h3>
+      <button class="modal-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="modal-body" id="cartBody"></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="bookingModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📅 Book Appointment</h3>
+      <button class="modal-close" onclick="closeBooking()">✕</button>
+    </div>
+    <div class="modal-body" id="bookingBody"></div>
+  </div>
+</div>
+
+<script>
+var cart=JSON.parse(localStorage.getItem('umaCart')||'[]');
+function saveCart(){localStorage.setItem('umaCart',JSON.stringify(cart));updateBadges();}
+function updateBadges(){var n=cart.length,cc=document.getElementById('cartCount'),fc=document.getElementById('fcCount');cc.textContent=n;fc.textContent=n;if(n>0){cc.classList.add('show');fc.classList.add('show');}else{cc.classList.remove('show');fc.classList.remove('show');}}
+function addToCart(name,base,idx){var el=document.getElementById('tip-'+idx);var tip=el?(parseFloat(el.value)||0):0;if(tip<0)tip=0;cart.push({id:Date.now()+Math.random(),name:name,basePrice:base,tip:tip,total:base+tip});saveCart();if(el)el.value='';showToast('✅ Added: '+name);}
+function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
+function openCart(){renderCart();document.getElementById('cartModal').classList.add('open');}
+function closeCart(){document.getElementById('cartModal').classList.remove('open');}
+function renderCart(){var b=document.getElementById('cartBody');if(!cart.length){b.innerHTML='<div class="cart-empty"><div class="ei">🛒</div><p>Your cart is empty!<br>Add a service to get started.</p></div>';return;}var g=cart.reduce(function(s,i){return s+i.total;},0),h='';cart.forEach(function(item){h+='<div class="cart-item"><div class="ci-name"><h4>'+item.name+'</h4><span>Base: ₹'+item.basePrice+(item.tip>0?' + Tip: ₹'+item.tip:'')+'</span></div><div class="ci-price">₹'+item.total+'</div><button class="ci-remove" onclick="removeItem(\''+item.id+'\')">🗑</button></div>';});h+='<div class="cart-total"><span>Grand Total</span><span style="color:var(--rose)">₹'+g+'</span></div>';h+='<button class="btn-checkout" onclick="closeCart();openBookingModal()">📋 Proceed to Book</button>';b.innerHTML=h;}
+function removeItem(id){cart=cart.filter(function(i){return String(i.id)!==String(id);});saveCart();renderCart();}
+function openBookingModal(){renderBookingForm();document.getElementById('bookingModal').classList.add('open');}
+function closeBooking(){document.getElementById('bookingModal').classList.remove('open');}
+function renderBookingForm(){var b=document.getElementById('bookingBody');if(!cart.length){b.innerHTML='<div class="cart-empty"><div class="ei">💄</div><p>Please add services to cart first!</p><button class="btn-book" style="margin-top:14px;width:auto;padding:10px 24px;" onclick="closeBooking()">Browse Services</button></div>';return;}var g=cart.reduce(function(s,i){return s+i.total;},0);var si=cart.map(function(i){return '<div class="os-item"><span>'+i.name+'</span><span>₹'+i.total+'</span></div>';}).join('');var st=cart.map(function(i){return i.name+': Rs.'+i.total;}).join(' | ');b.innerHTML='<div class="order-summary"><h4>📋 Order Summary</h4>'+si+'<div class="os-total"><span>Grand Total</span><span>₹'+g+'</span></div></div><div id="fw"><div class="form-group"><label>Customer Name *</label><input type="text" id="fn" placeholder="Your full name"></div><div class="form-group"><label>Phone Number *</label><input type="tel" id="fp" placeholder="+91 XXXXXXXXXX"></div><div class="form-group"><label>Address *</label><input type="text" id="fa" placeholder="Your address"></div><div class="form-group"><label>Preferred Date &amp; Time (optional)</label><input type="datetime-local" id="fd"></div><div class="form-group"><label>Special Instructions (optional)</label><textarea id="fs" placeholder="Any special requests..."></textarea></div><button class="btn-checkout" id="submitBtn" onclick="submitBooking(\''+encodeURIComponent(st)+'\','+g+')">✅ Confirm Booking</button></div>';}
+function submitBooking(enc,grand){var name=document.getElementById('fn').value.trim(),phone=document.getElementById('fp').value.trim(),addr=document.getElementById('fa').value.trim(),dt=document.getElementById('fd').value,notes=document.getElementById('fs').value.trim();if(!name){alert('Please enter your name.');return;}if(!phone){alert('Please enter phone number.');return;}if(!addr){alert('Please enter your address.');return;}var btn=document.getElementById('submitBtn');btn.textContent='Sending...';btn.disabled=true;var fd=new FormData();fd.append('_subject','New Appointment - Uma Beauty Parlour');fd.append('Customer Name',name);fd.append('Phone Number',phone);fd.append('Address',addr);fd.append('Services Booked',decodeURIComponent(enc));fd.append('Grand Total','Rs.'+grand);fd.append('Preferred Date & Time',dt||'Not specified');fd.append('Special Instructions',notes||'None');fetch('https://formspree.io/f/xqedjrrp',{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(function(r){if(r.ok){cart=[];saveCart();showSuccess();}else{alert('Error. Please WhatsApp us at 8299856640.');btn.textContent='✅ Confirm Booking';btn.disabled=false;}}).catch(function(){alert('Network error. WhatsApp us at 8299856640.');btn.textContent='✅ Confirm Booking';btn.disabled=false;});}
+function showSuccess(){document.getElementById('bookingBody').innerHTML='<div class="success-box"><div class="success-icon">🎉</div><h3>Appointment Booked!</h3><p>Thank you! Uma Beauty Parlour will contact you on WhatsApp to confirm your appointment. We cannot wait to make you look gorgeous!</p><a href="https://wa.me/918299856640" class="btn-wa" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Chat on WhatsApp</a></div>';}
+function scrollCarousel(d){document.getElementById('carouselTrack').scrollBy({left:d*280,behavior:'smooth'});}
+(function(){var t=document.getElementById('carouselTrack'),sx;t.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});t.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)t.scrollBy({left:dx<0?280:-280,behavior:'smooth'});},{passive:true});})();
+document.getElementById('cartModal').addEventListener('click',function(e){if(e.target===this)closeCart();});
+document.getElementById('bookingModal').addEventListener('click',function(e){if(e.target===this)closeBooking();});
+updateBadges();
+</script>
+</body>
+</html>
